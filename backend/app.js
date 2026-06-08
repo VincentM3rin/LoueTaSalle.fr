@@ -124,4 +124,5 @@ app.post('/reservation', (req, res) => {
 });
 
 app.listen(3000, () => {
+  console.log('Serveur backend démarré sur le port 3000');
 });
