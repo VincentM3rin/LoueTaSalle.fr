@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Connectez-vous</h1>
+    <h1>Inscription</h1>
     <p v-if="authMessage" :style="{ color: messageColor }">{{ authMessage }}</p>
-             
-    <form @submit.prevent="seConnecter">
+    <form @submit.prevent="sInscrire">
       <div class="form-group">
         <label>Nom d'utilisateur :</label>
         <input type="text" v-model="nomUser" required>
@@ -12,7 +11,7 @@
         <label>Mot de passe :</label>
         <input type="password" v-model="mdpUser" required>
       </div>
-      <button type="submit">Se connecter</button>
+      <button type="submit">S'inscrire</button>
     </form>
   </div>
 </template>
@@ -30,20 +29,16 @@ export default {
     }
   },
   methods: {
-    async seConnecter() {
+    async sInscrire() {
       try {
-        const response = await axios.post('http://localhost:3000/login', {
+        const response = await axios.post('http://localhost:3000/register', {
           nomUser: this.nomUser,
           mdpUser: this.mdpUser
         });
         alert(response.data.message);
-        
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        this.$emit('login-success');
-        
-        this.$router.push('/salles');
+        this.$router.push('/connexion');
       } catch (error) {
-        alert("Erreur de connexion");
+        alert("Erreur lors de l'inscription");
       }
     }
   }
